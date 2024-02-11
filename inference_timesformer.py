@@ -298,12 +298,14 @@ if __name__ == "__main__":
     model=RegressionPLModel.load_from_checkpoint(args.model_path,strict=False)
     model.cuda()
     model.eval()
+    prefix = '/content/gdrive/MyDrive/papyrus/modelmain/'
+
     wandb.init(
         project="Vesuvius", 
         name=f"ALL_scrolls_tta", 
         )
     for fragment_id in args.segment_id:
-        if os.path.exists(f"train_scrolls/{fragment_id}/layers/00.tif"):
+        if os.path.exists(f"{prefix}/train_scrolls/{fragment_id}/layers/00.tif"):
             preds=[]
             for r in [0]:
                 for i in [17]:
