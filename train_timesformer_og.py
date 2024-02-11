@@ -368,12 +368,13 @@ def scheduler_step(scheduler, avg_val_loss, epoch):
 torch.set_float32_matmul_precision('medium')
 #add all of the validation segments into the array to run multiple validation folds
 fragments=['20231210121321']
+prefix = '/content/gdrive/MyDrive/papyrus/modelmain/'
 for fid in fragments:
     CFG.valid_id=fid
     fragment_id = CFG.valid_id
     run_slug=f'training_scrolls_valid={fragment_id}_{CFG.size}x{CFG.size}_submissionlabels'
 
-    valid_mask_gt = cv2.imread(CFG.comp_dataset_path + f"train_scrolls/{fragment_id}/{fragment_id}_inklabels.png", 0)
+    valid_mask_gt = cv2.imread(CFG.comp_dataset_path + f"{prefix}/train_scrolls/{fragment_id}/{fragment_id}_inklabels.png", 0)
 
     pred_shape=valid_mask_gt.shape
     train_images, train_masks, valid_images, valid_masks, valid_xyxys = get_train_valid_dataset()
